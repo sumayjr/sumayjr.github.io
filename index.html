@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnostic Records, Diagnosis and Digital Workflows — Dr. Sumitra Reddy</title>
+<meta name="description" content="Session brief and software setup instructions for the hands-on lecture on digital orthodontic diagnosis with 3D Slicer and ITK-SNAP.">
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --ink: #1b1d21;
+    --ink-soft: #52565e;
+    --line: #e0ded8;
+    --accent: #0f6b5c;
+    --accent-soft: #e6f1ee;
+    --warn-bg: #fdf4e3;
+    --warn-line: #e6c98a;
+    --code-bg: #f0eee9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a;
+      --surface: #1b1e23;
+      --ink: #e9e8e4;
+      --ink-soft: #a3a8b0;
+      --line: #2c3038;
+      --accent: #4cc7ad;
+      --accent-soft: #17322d;
+      --warn-bg: #2a2418;
+      --warn-line: #6a5a33;
+      --code-bg: #23272e;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 22px 80px; }
+
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    padding: 48px 0 36px;
+    margin-bottom: 44px;
+  }
+  header .wrap { padding-bottom: 0; }
+  .eyebrow {
+    font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin: 0 0 14px;
+  }
+  h1 {
+    font-size: clamp(28px, 5vw, 40px); line-height: 1.15;
+    margin: 0 0 20px; letter-spacing: -.02em; font-weight: 650;
+  }
+  .speaker { margin: 0; font-weight: 600; font-size: 18px; }
+  .speaker span { display: block; font-weight: 400; font-size: 15.5px; color: var(--ink-soft); }
+  .when {
+    margin: 22px 0 0; padding: 10px 14px; display: inline-block;
+    background: var(--accent-soft); border-radius: 8px;
+    font-size: 15px; font-weight: 500;
+  }
+
+  h2 {
+    font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 600;
+    margin: 52px 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--line);
+  }
+  p { margin: 0 0 18px; }
+  ul { margin: 0 0 18px; padding-left: 22px; }
+  li { margin-bottom: 9px; }
+  a { color: var(--accent); }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 26px 28px; margin-bottom: 22px;
+  }
+
+  ol.steps { counter-reset: step; list-style: none; margin: 0; padding: 0; }
+  ol.steps > li {
+    position: relative; padding-left: 46px; margin-bottom: 26px; counter-increment: step;
+  }
+  ol.steps > li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: -1px;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    font-size: 15px; font-weight: 650;
+    display: flex; align-items: center; justify-content: center;
+  }
+  ol.steps > li:last-child { margin-bottom: 0; }
+  ol.steps h3 { margin: 3px 0 6px; font-size: 17.5px; font-weight: 620; }
+  ol.steps p { margin: 0 0 8px; color: var(--ink-soft); }
+  ol.steps p:last-child { margin-bottom: 0; }
+
+  code, .path {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .88em; background: var(--code-bg);
+    padding: 2px 6px; border-radius: 5px;
+  }
+  .menu { white-space: nowrap; font-weight: 600; }
+
+  .dl {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--accent); color: #fff; text-decoration: none;
+    padding: 13px 22px; border-radius: 9px;
+    font-weight: 600; font-size: 16px; margin: 6px 0 10px;
+  }
+  .dl:hover { filter: brightness(1.08); }
+  .dl svg { flex: none; }
+  .meta { font-size: 14px; color: var(--ink-soft); margin: 0; }
+  .meta code { font-size: 13px; }
+
+  .note {
+    background: var(--warn-bg); border: 1px solid var(--warn-line);
+    border-radius: 10px; padding: 16px 20px; margin: 24px 0;
+    font-size: 15.5px;
+  }
+  .note p:last-child { margin-bottom: 0; }
+  .note strong { font-weight: 650; }
+
+  footer {
+    margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line);
+    font-size: 14.5px; color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Digital Orthodontic Conclave</p>
+    <h1>Diagnostic Records, Diagnosis and Digital Workflows</h1>
+    <p class="speaker">Dr. Sumitra Reddy
+      <span>Professor &amp; Head, Department of Orthodontics<br>
+      KLE Society's Institute of Dental Sciences, Bengaluru, Karnataka</span>
+    </p>
+    <p class="when">17 August 2026 &nbsp;·&nbsp; 10.00 am – 11.30 am</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h2>About the session</h2>
+  <p>Contemporary orthodontic diagnosis has transformed from analogue to digital 3D and 4D. Intraoral scans and digital models have replaced impressions and plaster models. CBCTs for complex cases have enabled us to diagnose more precisely. The aim of this demonstration-based lecture is to enable participants to use the various tools of the open-source software <strong>3D Slicer</strong> and <strong>ITK-SNAP</strong>, with unrestricted free usage.</p>
+
+  <h2>Learning objectives</h2>
+  <p>At the end of the session, participants will be able to:</p>
+  <ul>
+    <li>Perform digital model analysis using 3D Slicer.</li>
+    <li>Analyse the maxillomandibular and dental relationship using 3D cephalometrics.</li>
+    <li>Diagnose facial asymmetry in 3D.</li>
+    <li>Localise impacted and transposed teeth accurately in 3D and plan treatment.</li>
+    <li>Apply AI-based segmentation of DICOM data to create STL files with 3D Slicer, for 3D printing and CBCT superimpositions.</li>
+    <li>Carry out semi-automatic segmentation of facial structures with ITK-SNAP and 3D Slicer.</li>
+    <li>Measure airway volume by segmentation with ITK-SNAP.</li>
+    <li>Perform 3D facial scans with a mobile application and measure them in Blender.</li>
+    <li>Superimpose pre- and post-treatment CBCTs using the gold-standard voxel-based method.</li>
+  </ul>
+
+  <h2>Before you arrive — software setup</h2>
+  <p>Please complete these steps on your own laptop <strong>before the session</strong>. The last step downloads several gigabytes of AI models, so do it on a good internet connection and leave time for it.</p>
+
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <h3>Install 3D Slicer 5.12.3</h3>
+        <p>Download version <strong>5.12.3</strong> for your operating system from the official site and install it:
+          <a href="https://download.slicer.org/">download.slicer.org</a>.</p>
+      </li>
+
+      <li>
+        <h3>Install the NNUNet extension</h3>
+        <p>Launch 3D Slicer, open the <span class="menu">Extensions Manager</span>, search for <strong>NNUNet</strong> and install it.</p>
+      </li>
+
+      <li>
+        <h3>Restart 3D Slicer</h3>
+        <p>Close and reopen Slicer so the extension is loaded.</p>
+      </li>
+
+      <li>
+        <h3>Download the DentoFac extension</h3>
+        <p>Save this package somewhere you can find it again — do not unpack it.</p>
+        <a class="dl" href="extension/DentoFac-git2616ec3-2026-08-09.tar.gz" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v12"></path><path d="m7 11 5 5 5-5"></path><path d="M4 20h16"></path>
+          </svg>
+          Download DentoFac extension
+        </a>
+        <p class="meta"><code>DentoFac-git2616ec3-2026-08-09.tar.gz</code> · 368 KB · Windows and Linux</p>
+      </li>
+
+      <li>
+        <h3>Install it from file</h3>
+        <p>In the <span class="menu">Extensions Manager</span>, choose <span class="menu">Install from file</span> and select the <code>.tar.gz</code> package you just downloaded.</p>
+      </li>
+
+      <li>
+        <h3>Restart 3D Slicer again</h3>
+        <p>Reopen Slicer so the DentoFac module appears in the modules list.</p>
+      </li>
+
+      <li>
+        <h3>Install the NNUNet requirements</h3>
+        <p>Go to <span class="menu">DentoFac &rarr; DentoFac Hub</span> and click <strong>Install NNUNet Requirements</strong>.</p>
+        <p>Depending on your internet speed this takes anywhere from <strong>10 to 60 minutes</strong>. Progress is printed in the Python console — open it from <span class="menu">View &rarr; Python Console</span> if you want to watch it.</p>
+      </li>
+    </ol>
+  </div>
+
+  <div class="note">
+    <p><strong>Please finish the setup at home.</strong> Conference Wi-Fi will not be fast enough for the model download on the day of the session.</p>
+  </div>
+
+  <footer>
+    <p>Open-source software used in this session: <a href="https://www.slicer.org/">3D Slicer</a>, <a href="http://www.itksnap.org/">ITK-SNAP</a> and <a href="https://www.blender.org/">Blender</a> — all free for unrestricted use.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
