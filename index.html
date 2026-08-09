@@ -41,6 +41,7 @@
     color: var(--ink);
     font: 400 17px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
+  .serif { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif; }
   .wrap { max-width: 780px; margin: 0 auto; padding: 0 22px 80px; }
 
   header {
@@ -55,16 +56,31 @@
     color: var(--accent); font-weight: 600; margin: 0 0 14px;
   }
   h1 {
-    font-size: clamp(28px, 5vw, 40px); line-height: 1.15;
-    margin: 0 0 20px; letter-spacing: -.02em; font-weight: 650;
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    font-size: clamp(27px, 4.8vw, 38px); line-height: 1.2;
+    margin: 0 0 8px; letter-spacing: -.01em; font-weight: 600;
   }
-  .speaker { margin: 0; font-weight: 600; font-size: 18px; }
-  .speaker span { display: block; font-weight: 400; font-size: 15.5px; color: var(--ink-soft); }
+  .theme {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    font-style: italic; font-size: 17px; color: var(--ink-soft);
+    margin: 0 0 24px;
+  }
+  .speaker {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    margin: 0; font-weight: 600; font-size: 19px;
+  }
+  .speaker span {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: block; font-weight: 400; font-size: 15.5px; color: var(--ink-soft);
+    margin-top: 4px;
+  }
   .when {
-    margin: 22px 0 0; padding: 10px 14px; display: inline-block;
-    background: var(--accent-soft); border-radius: 8px;
+    margin: 24px 0 0; padding: 12px 16px; display: block;
+    background: var(--accent-soft); border-radius: 4px;
+    border-left: 3px solid var(--accent);
     font-size: 15px; font-weight: 500;
   }
+  .when span { display: block; font-weight: 400; color: var(--ink-soft); margin-top: 3px; }
 
   h2 {
     font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
@@ -94,7 +110,10 @@
     display: flex; align-items: center; justify-content: center;
   }
   ol.steps > li:last-child { margin-bottom: 0; }
-  ol.steps h3 { margin: 3px 0 6px; font-size: 17.5px; font-weight: 620; }
+  ol.steps h3 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    margin: 3px 0 6px; font-size: 18px; font-weight: 600;
+  }
   ol.steps p { margin: 0 0 8px; color: var(--ink-soft); }
   ol.steps p:last-child { margin-bottom: 0; }
 
@@ -108,7 +127,7 @@
   .dl {
     display: inline-flex; align-items: center; gap: 10px;
     background: var(--accent); color: #fff; text-decoration: none;
-    padding: 13px 22px; border-radius: 9px;
+    padding: 13px 22px; border-radius: 5px;
     font-weight: 600; font-size: 16px; margin: 6px 0 10px;
   }
   .dl:hover { filter: brightness(1.08); }
@@ -134,13 +153,16 @@
 
 <header>
   <div class="wrap">
-    <p class="eyebrow">Digital Orthodontic Conclave</p>
+    <p class="eyebrow">IOS SDM OrthoTech 2026 &nbsp;·&nbsp; Digital Orthodontics Conclave</p>
     <h1>Diagnostic Records, Diagnosis and Digital Workflows</h1>
+    <p class="theme">Integrating Digital Workflow in Contemporary Orthodontics — a two-day hands-on workshop</p>
     <p class="speaker">Dr. Sumitra Reddy
       <span>Professor &amp; Head, Department of Orthodontics<br>
       KLE Society's Institute of Dental Sciences, Bengaluru, Karnataka</span>
     </p>
-    <p class="when">17 August 2026 &nbsp;·&nbsp; 10.00 am – 11.30 am</p>
+    <p class="when">17 August 2026 &nbsp;·&nbsp; 10.00 am – 11.30 am
+      <span>SDM College of Dental Sciences &amp; Hospital, Sattur, Dharwad</span>
+    </p>
   </div>
 </header>
 
@@ -227,6 +249,7 @@
 
   <footer>
     <p>Open-source software used in this session: <a href="https://www.slicer.org/">3D Slicer</a>, <a href="http://www.itksnap.org/">ITK-SNAP</a> and <a href="https://www.blender.org/">Blender</a> — all free for unrestricted use.</p>
+    <p>IOS SDM OrthoTech 2026, 17 &amp; 18 August 2026, organised by the Hubli-Dharwad Orthodontic Study Group with the Indian Orthodontic Society and SDM College of Dental Sciences &amp; Hospital, Dharwad.</p>
   </footer>
 
 </div>
